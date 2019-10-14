@@ -19,8 +19,8 @@ The symbol before each Pod name indicates the status of the Pod. A `~` indicates
 Verbose mode shows a bit more detail:
 
     $ pod use-latest-tag --verbose
-    KNConvergeBill preview_branch: master -> latest_tag: 2.0.3
-    SuiNetworking preview_tag: 3.1.0 -> latest_tag: 3.1.3
+    KNConvergeBill current_branch: master -> latest_tag: 2.0.3
+    SuiNetworking current_tag: 3.1.0 -> latest_tag: 3.1.3
     [!] 2 Pods has been changed to use the latest tag. Please double check the Podfile's changes.
 
 If no Pods are out of date, then the output looks like:

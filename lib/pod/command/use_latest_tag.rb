@@ -51,16 +51,16 @@ module Pod
           next if latest_tag.empty?
 
           exp = ""
-          preview_version = ""
+          current_version = ""
           latest_version = "latest_tag: #{latest_tag}"
           if target_pods[spec_name][:tag] != nil && target_pods[spec_name][:tag] != latest_tag
             # preview use tag
             exp = "/#{git_path}/s/:tag[ ]*=>[ ]*'[^']*'/:tag => '#{latest_tag}'/"
-            preview_version = "preview_tag: #{target_pods[spec_name][:tag]}"
+            current_version = "current_tag: #{target_pods[spec_name][:tag]}"
           elsif target_pods[spec_name][:branch] != nil
             # preview use branch
             exp = %(/#{git_path}/s/:branch[ ]*=>[ ]*'[^']*'/:tag => '#{latest_tag}'/)
-            preview_version = "preview_branch: #{target_pods[spec_name][:branch]}"
+            current_version = "current_branch: #{target_pods[spec_name][:branch]}"
           end
           next if exp.empty?
 
@@ -72,7 +72,7 @@ module Pod
           `#{command}`
 
           # cache changed result
-          changed_result(spec_name, preview_version, latest_version)
+          changed_result(spec_name, current_version, latest_version)
         end.compact
       end
 
@@ -85,9 +85,9 @@ module Pod
         return latest_tag
       end
 
-      def changed_result(spec_name, preview_version, latest_version)
+      def changed_result(spec_name, current_version, latest_version)
         if @check_command_verbose
-          "#{spec_name} #{preview_version} -> #{latest_version}"
+          "#{spec_name} #{current_version} -> #{latest_version}"
         else
           "~#{spec_name}"
         end
